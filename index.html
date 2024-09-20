@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rewards - Loyality Program</title>
+</head>
+
+<body>
+    <div class="captcha-con">
+        <form onsubmit="validateCaptcha()"
+            class="d-flex align-items-center justify-content-center flex-column p-4 col-10 bg-white rounded">
+            <h5 class="text-center mb-3"> <i class="fa fa-info-circle"></i> Captacha verification</h5>
+            <hr class="p-0 m-0 col-12 mb-3">
+            <p class="mb-2">Enter the characters you see in the image to verify that your not a robot</p>
+            <div class="d-flex w-100 mb-2 align-items-end gap-1 captcha-inputs">
+                <div id="captcha" class="border"></div>
+                <button type="button" onclick="createCaptcha()" class="btn bg-light border rounded"><i
+                        class="fa fa-sync"></i></button>
+            </div>
+            <input type="text" placeholder="Enter the above captcha here" id="cpatchaTextBox"
+                class="col-12 input rounded" />
+            <small class="col-12 text-danger d-none captcha-error">Enter Valid Captcha</small>
+            <button type="submit" class="btn btn-success col-12 mt-2">Submit</button>
+        </form>
+    </div>
+
+    <div class="main">
+        <div class="top p-4">
+            <img src="./assets/images/trophy.webp" alt="" class="trophy gift-wobble " width="35%">
+            <h1 class="title">Rewards</h1>
+            <h6 class="reward">Brand-Loyality Program</h6>
+            <div class="p-1 bg-gray mt-3 rounded">
+                <p class="text-light txt">Join Rewards program and earn <br> upto
+                    <span class="main-g">Rs.1,00,000*</span>
+                </p>
+            </div>
+        </div>
+        <div class="bottom col-12 p-4">
+            <form action="" class="col-12 d-flex flex-column gap-3">
+                <small class="text-center text-light">Sign up and get assured Rs.10* instant bonus </small>
+                <div class="col-12">
+                    <div class="input-group">
+                        <span class="input-group-text"><img src="./assets/images/avatar.svg" width="20px" alt=""></span>
+                        <input type="text" placeholder="Enter your name" id="name" class="form-control"
+                            onkeydown="return preventNumberInput(event)" onchange="validateName()" required />
+                    </div>
+                    <div class="name-error d-none text-danger">
+                        <small>Please enter your name.</small>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="input-group">
+                        <span class="input-group-text"><img src="./assets/images/mobile.svg" width="20px" alt=""></span>
+                        <input type="number" placeholder="Enter your mobile number" id="mobile" class="form-control"
+                            onchange="validateMobile()" required />
+                    </div>
+                    <div class="mobile-error d-none text-danger">
+                        <small>Please enter a valid mobile number.</small>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="input-group">
+                        <small for="checkbox" class="text-light"> <input type="checkbox" class="form-check-input"
+                                id="checkbox" checked required /> I Authorise to
+                            send notifications via SMS/ RCS/ CALL/ EMAIL/
+                            WHATSAPP.</small>
+                    </div>
+                </div>
+                <div class="viewotp">
+                    <button class="btn viewbtn col-12" type="button" id="verifyOtp" onclick="sendOtp(event)">
+                        Send otp</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="games-list gap-4 col-12 d-none align-items-center justify-content-center flex-column p-4">
+        <div class="d-flex align-items-center justify-content-center flex-column gap-3">
+            <h6 class="top-offers">Today's top offers</h6>
+            <img src="./assets/images/stars.svg" alt="" width="50%">
+        </div>
+        <a href="https://www.google.com/" title="link" class="element element-1">
+            <img src="./assets/images/1.webp" alt="img" width="100%">
+        </a>
+        <a href="https://www.google.com/" title="link" class="element element-2">
+            <img src="./assets/images/2.webp" alt="img" width="100%">
+        </a>
+        <a href="https://www.google.com/" title="link" class="element element-3">
+            <img src="./assets/images/3.webp" alt="img" width="100%">
+        </a>
+    </div>
+
+    <div id="otp-con"
+        class="otp-con d-none position-absolute container-fluid align-items-center justify-content-center">
+        <div
+            class="otp-pop-up col-12 bg-white border rounded p-4 d-flex align-items-center justify-content-center flex-column">
+            <div class="d-flex col-12 align-items-end justify-content-end">
+                <button class="btn btn-white border rounded shadow-sm" onclick="otpclose()">
+                    <i class="fa fa-close"></i></button>
+            </div>
+            <h3>Verify OTP to Login</h3>
+            <div class="mt-3 mb-2">
+                <div class="d-flex align-items-center justify-content-between gap-3">
+                    <input type="number" class="form-control text-dark border otp-in text-center">
+                    <input type="number" class="form-control text-dark border otp-in text-center">
+                    <input type="number" class="form-control text-dark border otp-in text-center">
+                    <input type="number" class="form-control text-dark border otp-in text-center">
+                </div>
+            </div>
+            <p class="d-flex align-items-center justify-content-center gap-1">
+                <button type="button" class="text-primary decoration-none text-muted btn p-0 m-0" onclick="resendotp()"
+                    disabled id="resend">Resend</button>
+                the code in
+                <span class="otp-timer">01:00</span>
+            </p>
+            <small class="text-muted mb-2 mt-1 f-12"><i class="fas fa-info-circle"></i> Enter the
+                received four digits OTP</small>
+            <button class="btn otpbtn col-12" id="otpcode" onclick="verifyotp(event)">Verify otp</button>
+        </div>
+    </div>
+
+    <div class="preloader d-none">
+        <img src="./assets/images/preloader.png" alt="preloader" width="25%" class="preloader-img">
+    </div>
+
+    <footer class="p-2 border">
+        <p class="text-center">Copyright © 2024. All rights reserved.</p>
+    </footer>
+
+    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/poppers.js"></script>
+    <script src="./assets/js/captcha.js"></script>
+</body>
+</html>
